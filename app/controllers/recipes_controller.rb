@@ -6,10 +6,18 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /users/:user_id/recipes
   def index
+ 
+
     if params[:user_id]
       # Dropdown option 'My Recipe' navbar avatar
       user = User.find(params[:user_id])
       @recipes = user.recipes
+
+      respond_to do |format|
+        format.html {render :index}
+        format.json {render json: @recipes}
+      end
+
     else
       # navbar Kitchen&Recipes button
       @recipes = Recipe.public_and_current_user_recipes(current_user)
@@ -20,6 +28,13 @@ class RecipesController < ApplicationController
       # else
       #   @recipes = Recipe.public_recipes
       # end
+
+      respond_to do |format|
+        format.html {render :index}
+        format.json {render json: @recipes}
+      end
+
+
     end
   end
 

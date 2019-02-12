@@ -31,6 +31,7 @@ usr = User.create(
   password: "Password1!",
   first_name: "Lorem",
   last_name: "Ipsum"
+)
 ) do |user|
   Rails.root.join(icon).open('rb') do |io|
     user.avatar.attach(io: io, filename: icon.split(/\//).last, content_type: ['image/jpg'])
